@@ -19,6 +19,10 @@ export default {
         return Nova.request().post(`/nova-vendor/spatie/backup-tool/backups`, { option });
     },
 
+    restoreBackup({ disk, path }) {
+        return Nova.request().put(`/nova-vendor/spatie/backup-tool/backups`, {  disk, path });
+    },
+
     deleteBackup({ disk, path }) {
         return Nova.request().delete(`/nova-vendor/spatie/backup-tool/backups`, {
             params: { disk, path },

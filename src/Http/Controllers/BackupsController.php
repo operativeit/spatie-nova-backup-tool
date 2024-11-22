@@ -8,6 +8,8 @@ use Spatie\Backup\BackupDestination\Backup;
 use Spatie\Backup\BackupDestination\BackupDestination;
 use Spatie\Backup\Helpers\Format;
 use Spatie\BackupTool\Jobs\CreateBackupJob;
+use Spatie\BackupTool\Jobs\RestoreBackupJob;
+
 use Spatie\BackupTool\Rules\BackupDisk;
 use Spatie\BackupTool\Rules\PathToZip;
 
@@ -43,6 +45,18 @@ class BackupsController extends ApiController
 
         dispatch(new CreateBackupJob($option))
             ->onQueue(config('nova-backup-tool.queue'));
+    }
+
+    public function restore(Request $request) {
+        $validated = $request->validate([
+            'disk' => new BackupDisk(),
+            'path' => ['required', new PathToZip()],
+        ]);
+
+        dispatch(new RestoreBackupJob($validated['disk'], $validated['path']))
+    	   ->onQueue(config('nova-backup-tool.queue'));
+
+	$this->respondSuccess();
     }
 
     public function delete(Request $request)

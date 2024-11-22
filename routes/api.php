@@ -9,6 +9,8 @@ use Spatie\BackupTool\Http\Controllers\DownloadBackupController;
 Route::get('backups', BackupsController::class.'@index');
 Route::post('backups', BackupsController::class.'@create');
 Route::delete('backups', BackupsController::class.'@delete');
+Route::put('backups', BackupsController::class.'@restore');
+
 
 Route::get('download-backup', DownloadBackupController::class);
 

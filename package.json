@@ -10,7 +10,8 @@
         "production": "mix --production",
         "check-format": "prettier --list-different 'resources/**/*.{css,js,vue}'",
         "format": "prettier --write 'resources/**/*.{css,js,vue}'",
-        "lint": "eslint resources/js --fix --ext js,vue"
+        "lint": "eslint resources/js --fix --ext js,vue",
+        "nova:install": "npm --prefix='../../vendor/laravel/nova' ci"
     },
     "devDependencies": {
         "@vue/compiler-sfc": "^3.2.22",

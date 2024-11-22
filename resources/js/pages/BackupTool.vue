@@ -56,6 +56,8 @@
                 :backups="activeDiskBackups"
                 :active-disk.sync="activeDisk"
                 @delete="deleteBackup"
+                @restore="restoreBackup"
+                @update:activeDisk="this.activeDisk = $event; updateActiveDiskBackups()"
                 @setModalVisibility="setModalVisibility"
             />
         </LoadingCard>
@@ -143,8 +145,17 @@ export default {
             return api.createPartialBackup(option);
         },
 
+
+        restoreBackup({ disk, path }) {
+            return api.restoreBackup({ disk, path });
+        },
+
         deleteBackup({ disk, path }) {
-            return api.deleteBackup({ disk, path });
+            if (api.deleteBackup({ disk, path })) {
+                this.updateBackupStatuses();
+		this.updateActiveDiskBackups();
+		Nova.success(this.__('Deleted'));
+            }
         },
 
         startPolling() {

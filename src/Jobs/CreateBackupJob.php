@@ -24,7 +24,7 @@ class CreateBackupJob implements ShouldQueue
     public function handle()
     {
         $backupJob = BackupJobFactory::createFromConfig(BackupConfig::fromArray(config('backup')));
-        
+
         if ($this->option === 'only-db') {
             $backupJob->dontBackupFilesystem();
         }

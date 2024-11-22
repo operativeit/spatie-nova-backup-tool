@@ -4,7 +4,6 @@
             v-if="disks.length > 1">
             <SelectControl
                 class="w-full md:w-1/5"
-                size="lg"
                 :options="getDiscs()"
                 :value="activeDisk"
                 @input="$emit('update:activeDisk', $event.target.value)"

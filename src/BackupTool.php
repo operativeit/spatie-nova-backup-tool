@@ -22,8 +22,10 @@ class BackupTool extends Tool
      */
     public function menu(Request $request)
     {
-        return MenuSection::make(__('Backups'))
-            ->path('/backups')
-            ->icon('server');
+        if (config('nova-backup-tool.displayInNavigation')) {
+            return MenuSection::make(__('Backups'))
+                ->path('/backups')
+                ->icon('server');
+        }
     }
 }

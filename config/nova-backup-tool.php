@@ -15,4 +15,9 @@ return [
      * Queue to use for the jobs to run through.
      */
     'queue' => null,
+
+    /*
+     * Display in navigation menu
+     */    
+    'displayInNavigation' => true,
 ];
